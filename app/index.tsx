@@ -1,6 +1,16 @@
-import { Text, View } from "react-native";
+import { translate } from "@/lib/translation/translation";
+import { useState } from "react";
+import { Button, Text, TextInput, View } from "react-native";
 
 export default function Index() {
+  const [word, setWord] = useState("slowo");
+  const [result, setResult] = useState("");
+
+  async function handleTranslate() {
+    const t = await translate(word, "pl", "en");
+    setResult(t);
+  }
+
   return (
     <View
       style={{
@@ -9,7 +19,9 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <TextInput value={word} onChangeText={setWord} />
+      <Button title="translate" onPress={handleTranslate} />
+      <Text style={{ marginTop: 20 }}>{result}</Text>
     </View>
   );
 }
