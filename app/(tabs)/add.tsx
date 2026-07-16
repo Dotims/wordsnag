@@ -3,7 +3,7 @@ import { translate } from "@/lib/translation/translation";
 import { useEffect, useState } from "react";
 import { Button, FlatList, Text, TextInput, View } from "react-native";
 
-export default function Index() {
+export default function Add() {
   const [word, setWord] = useState("slowo");
   const [result, setResult] = useState("");
   const [words, setWords] = useState<any[]>([]);
