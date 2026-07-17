@@ -1,23 +1,26 @@
-import { getWords, initDb, insertWord } from "@/db/words";
 import { translate } from "@/lib/translation/translation";
-import { useEffect, useState } from "react";
+import { useWordStore } from "@/store/words";
+import { useState } from "react";
 import { Button, FlatList, Text, TextInput, View } from "react-native";
 
 export default function Add() {
   const [word, setWord] = useState("slowo");
   const [result, setResult] = useState("");
-  const [words, setWords] = useState<any[]>([]);
 
-  useEffect(() => {
-    initDb();
-    setWords(getWords());
-  }, []);
-
+  const words = useWordStore((s) => s.words);
+  const addWord = useWordStore((s) => s.addWord);
+  
   async function handleTranslate() {
     const t = await translate(word, "pl", "en");
     setResult(t);
-    insertWord(word, t, "pl", "en", new Date().toISOString());
-    setWords(getWords());
+    addWord({
+      id: Date.now().toString(),
+      word,
+      translation: t,
+      sourceLang: "pl",
+      targetLang: "en",
+      createAt: new Date().toISOString(),
+    });
   }
 
   return (

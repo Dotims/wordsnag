@@ -1,3 +1,4 @@
+import { useWordStore } from "@/store/words";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -9,6 +10,7 @@ const blockShadow = {
 
 export default function Home() {
   const insets = useSafeAreaInsets();
+  const wordCount = useWordStore((s) => s.words.length);
 
   return (
     <View className="flex-1 bg-surface" style={{ paddingTop: insets.top }}>
@@ -78,7 +80,7 @@ export default function Home() {
               className="mr-2 flex-1 rounded-2xl border border-line bg-white p-5"
               style={blockShadow}
             >
-              <Text className="text-3xl font-bold text-ink">42</Text>
+              <Text className="text-3xl font-bold text-ink">{wordCount}</Text>
               <Text className="mt-1 text-xs font-medium text-muted">Words saved</Text>
             </View>
             <View

@@ -1,3 +1,4 @@
+import { Word } from "@/types/word";
 import * as SQLite from "expo-sqlite";
 import { Platform } from "react-native";
 
@@ -5,7 +6,7 @@ const db = Platform.OS === "web" ? null : SQLite.openDatabaseSync("wordsnag.db")
 
 export function getWords() {
   if (!db) return [];   
-  return db.getAllSync("SELECT * FROM words ORDER BY createAt DESC");
+  return db.getAllSync<Word>("SELECT * FROM words ORDER BY createAt DESC");
 }
 
 export function initDb() {
