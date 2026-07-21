@@ -13,9 +13,9 @@ export default function Home() {
   const wordCount = useWordStore((s) => s.words.length);
 
   return (
-    <View className="flex-1 bg-surface" style={{ paddingTop: insets.top }}>
+    <View className="flex-1 bg-surface">
       <ScrollView
-        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 32 }}
+        className="px-[20px] py-[10px]"
         showsVerticalScrollIndicator={false}
       >
         {/* header */}
